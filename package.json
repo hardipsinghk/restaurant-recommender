@@ -8,7 +8,6 @@
   "dependencies": {
     "express": "^4.18.2",
     "node-fetch": "^2.6.11"
-  }
-}
-"dummy": "trigger"
+  },
+  "dummy": "trigger"
 }
