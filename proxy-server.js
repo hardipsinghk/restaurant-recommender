@@ -3,8 +3,8 @@ const fetch = require('node-fetch');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const YELP_API_KEY = "YOUR_YELP_API_KEY"; // Replace this with your real key
-const DEFAULT_LOCATION = "New York, NY";  // Replace with geolocation if needed
+const YELP_API_KEY = "h7_TXwBpF3o9X4xI4YWPEv3Fqpx5vR_1-0_Yr3UMPrY7V5xFoqvgCQSO4XoNSIVmebxXML7ifAHxCK91X4bbJ4FhyIVLkQa3CbdDj7DDGcdqOdvnLwJuXWaUOaZkaHYx"; // Replace this with your real key
+const DEFAULT_LOCATION = "Toronto, Canada";  // Replace with geolocation if needed
 
 app.use(express.static('.'));
 
