@@ -3,15 +3,16 @@ const fetch = require('node-fetch');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const YELP_API_KEY = "h7_TXwBpF3o9X4xI4YWPEv3Fqpx5vR_1-0_Yr3UMPrY7V5xFoqvgCQSO4XoNSIVmebxXML7ifAHxCK91X4bbJ4FhyIVLkQa3CbdDj7DDGcdqOdvnLwJuXWaUOaZkaHYx"; // Replace this with your real key
-const DEFAULT_LOCATION = "Toronto, Canada";  // Replace with geolocation if needed
+const YELP_API_KEY = process.env.YELP_API_KEY;
+const DEFAULT_LOCATION = "Toronto, Canada";  // Replace with your real city if desired
 
 app.use(express.static('.'));
 
 app.get('/api/recommend', async (req, res) => {
   const { price, distance } = req.query;
-  const radius = Math.min(parseInt(distance || 10) * 1000, 40000); // Yelp max radius: 40 km
+  const radius = Math.min(parseInt(distance || 10) * 1000, 40000); // Yelp max: 40km
 
+  // Use the selected price level and include all lower tiers (e.g., 3 = 1,2,3)
   const priceRange = Array.from({ length: price }, (_, i) => i + 1).join(',');
 
   const url = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${encodeURIComponent(DEFAULT_LOCATION)}&radius=${radius}&price=${priceRange}&limit=10`;
@@ -19,22 +20,24 @@ app.get('/api/recommend', async (req, res) => {
   try {
     const response = await fetch(url, {
       headers: {
-        Authorization: `Bearer ${YELP_API_KEY}`,
+        Authorization: \`Bearer \${YELP_API_KEY}\`,
       }
     });
 
     const data = await response.json();
-    const first = data.businesses && data.businesses[0];
+    const businesses = data.businesses;
 
-    if (!first) {
+    if (!businesses || businesses.length === 0) {
       return res.status(404).json({ error: "No businesses found" });
     }
 
+    const random = businesses[Math.floor(Math.random() * businesses.length)];
+
     res.json({
-      name: first.name,
-      address: first.location.address1,
-      rating: first.rating,
-      price: first.price,
+      name: random.name,
+      address: random.location.address1,
+      rating: random.rating,
+      price: random.price,
     });
   } catch (error) {
     console.error(error);
@@ -43,5 +46,5 @@ app.get('/api/recommend', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Proxy server running at http://localhost:${PORT}`);
+  console.log(\`Proxy server running at http://localhost:\${PORT}\`);
 });
