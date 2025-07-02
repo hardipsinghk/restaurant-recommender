@@ -23,11 +23,11 @@ async function getRecommendation() {
     if (!data || !data.name) throw new Error("No results");
 
     resultDiv.innerHTML = `
-      <img src="\${data.photo}" alt="Restaurant photo" style="width:100%; max-height:200px; object-fit:cover; border-radius:8px;" />
-      <h2><a href="\${data.map}" target="_blank" style="text-decoration:none; color:#007bff;">\${data.name}</a></h2>
-      <p>\${data.address}</p>
-      <p>Rating: \${data.rating} ⭐</p>
-      <p>Price: \${data.price || 'N/A'}</p>
+      <img src="${data.photo}" alt="Restaurant photo" style="width:100%; max-height:200px; object-fit:cover; border-radius:8px;" />
+      <h2><a href="${data.map}" target="_blank" style="text-decoration:none; color:#007bff;">${data.name}</a></h2>
+      <p>${data.address}</p>
+      <p>Rating: ${data.rating} ⭐</p>
+      <p>Price: ${data.price || 'N/A'}</p>
     `;
   } catch (err) {
     resultDiv.innerHTML = "No restaurants found or API issue.";
