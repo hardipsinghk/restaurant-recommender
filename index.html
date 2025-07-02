@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Restaurant Recommender</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,29 +29,31 @@
           <span id="dist-value">10</span> km
         </label>
 
-        <label>Location
-          <select id="location">
-            <option value="Toronto, Canada">Toronto</option>
-            <option value="Vancouver, Canada">Vancouver</option>
-            <option value="Montreal, Canada">Montreal</option>
-            <option value="Calgary, Canada">Calgary</option>
-            <option value="Ottawa, Canada">Ottawa</option>
-            <option value="Edmonton, Canada">Edmonton</option>
-          </select>
-        </label>
+        <div class="dropdown-row">
+          <label>Location
+            <select id="location">
+              <option value="Toronto, Canada">Toronto</option>
+              <option value="Vancouver, Canada">Vancouver</option>
+              <option value="Montreal, Canada">Montreal</option>
+              <option value="Calgary, Canada">Calgary</option>
+              <option value="Ottawa, Canada">Ottawa</option>
+              <option value="Edmonton, Canada">Edmonton</option>
+            </select>
+          </label>
 
-        <label>Cuisine
-          <select id="cuisine">
-            <option value="">Any</option>
-            <option value="italian">Italian</option>
-            <option value="indian">Indian</option>
-            <option value="chinese">Chinese</option>
-            <option value="mexican">Mexican</option>
-            <option value="japanese">Japanese</option>
-            <option value="thai">Thai</option>
-            <option value="vegan">Vegan</option>
-          </select>
-        </label>
+          <label>Cuisine
+            <select id="cuisine">
+              <option value="">Any</option>
+              <option value="italian">Italian</option>
+              <option value="indian">Indian</option>
+              <option value="chinese">Chinese</option>
+              <option value="mexican">Mexican</option>
+              <option value="japanese">Japanese</option>
+              <option value="thai">Thai</option>
+              <option value="vegan">Vegan</option>
+            </select>
+          </label>
+        </div>
       </div>
 
       <div id="result" class="result-card"></div>
