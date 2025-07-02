@@ -115,3 +115,17 @@ select {
 .center-icon:active {
   transform: scale(0.95);
 }
+
+/* Center filter text and reduce font size */
+.filter-group label {
+  text-align: center;
+  font-size: 0.95em;
+  align-items: center;
+}
+
+/* Enlarge the question icon */
+.center-icon {
+  width: 130px;
+  height: 130px;
+  font-size: 64px;
+}
