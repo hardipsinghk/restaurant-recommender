@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Mobile Restaurant Recommender</title>
+  <title>Restaurant Recommender</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -17,22 +17,29 @@
         <span>?</span>
       </div>
 
-      <div class="slider-group">
-        <label>Price ($): 
+      <div class="filter-group">
+        <label>💲 Price
           <input type="range" id="price" min="1" max="4" value="2" oninput="updateSliderValues()">
           <span id="price-value">2</span>
         </label>
-      </div>
 
-      <div class="slider-group">
-        <label>Distance (km): 
+        <label>📍 Distance
           <input type="range" id="distance" min="1" max="40" value="10" oninput="updateSliderValues()">
           <span id="dist-value">10</span> km
         </label>
-      </div>
 
-      <div class="slider-group">
-        <label>Cuisine:
+        <label>Location
+          <select id="location">
+            <option value="Toronto, Canada">Toronto</option>
+            <option value="Vancouver, Canada">Vancouver</option>
+            <option value="Montreal, Canada">Montreal</option>
+            <option value="Calgary, Canada">Calgary</option>
+            <option value="Ottawa, Canada">Ottawa</option>
+            <option value="Edmonton, Canada">Edmonton</option>
+          </select>
+        </label>
+
+        <label>Cuisine
           <select id="cuisine">
             <option value="">Any</option>
             <option value="italian">Italian</option>
@@ -42,19 +49,6 @@
             <option value="japanese">Japanese</option>
             <option value="thai">Thai</option>
             <option value="vegan">Vegan</option>
-          </select>
-        </label>
-      </div>
-
-      <div class="slider-group">
-        <label>City (Canada):
-          <select id="location">
-            <option value="Toronto, Canada">Toronto</option>
-            <option value="Vancouver, Canada">Vancouver</option>
-            <option value="Montreal, Canada">Montreal</option>
-            <option value="Calgary, Canada">Calgary</option>
-            <option value="Ottawa, Canada">Ottawa</option>
-            <option value="Edmonton, Canada">Edmonton</option>
           </select>
         </label>
       </div>
