@@ -32,12 +32,15 @@ app.get('/api/recommend', async (req, res) => {
     }
 
     const random = businesses[Math.floor(Math.random() * businesses.length)];
+    const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(random.name + ' ' + random.location.address1 + ' ' + loc)}`;
 
     res.json({
       name: random.name,
       address: random.location.address1,
       rating: random.rating,
       price: random.price,
+      photo: random.image_url,
+      map: mapsLink
     });
   } catch (error) {
     console.error(error);
