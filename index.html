@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mobile Restaurant Recommender</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="menu-icon">&#9776;</div>
+    </header>
+
+    <main>
+      <div class="center-icon" onclick="getRecommendation()">
+        <span>?</span>
+      </div>
+
+      <div class="slider-group">
+        <label>Price ($):</label>
+        <input type="range" id="price" min="1" max="3" value="2">
+      </div>
+
+      <div class="slider-group">
+        <label>Distance (km):</label>
+        <input type="range" id="distance" min="1" max="40" value="10">
+      </div>
+
+      <div id="result" class="result-card"></div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

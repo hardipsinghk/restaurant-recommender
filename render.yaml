@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: restaurant-recommender
+    env: node
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "node proxy-server.js"
+    envVars:
+      - key: YELP_API_KEY
+        value: YOUR_YELP_API_KEY
