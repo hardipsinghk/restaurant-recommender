@@ -4,25 +4,25 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const YELP_API_KEY = process.env.YELP_API_KEY;
-const DEFAULT_LOCATION = "Toronto, Canada";  // Replace with your real city if desired
 
 app.use(express.static('.'));
 
 app.get('/api/recommend', async (req, res) => {
-  const { price, distance } = req.query;
-  const radius = Math.min(parseInt(distance || 10) * 1000, 40000); // Yelp max: 40km
-
-  // Use the selected price level and include all lower tiers (e.g., 3 = 1,2,3)
+  const { price, distance, cuisine, location } = req.query;
+  const radius = Math.min(parseInt(distance || 10) * 1000, 40000);
   const priceRange = Array.from({ length: price }, (_, i) => i + 1).join(',');
 
-  const url = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${encodeURIComponent(DEFAULT_LOCATION)}&radius=${radius}&price=${priceRange}&limit=10`;
+  const term = cuisine || 'restaurants';
+  const loc = location || 'Toronto, Canada';
+
+  const url = `https://api.yelp.com/v3/businesses/search?term=${encodeURIComponent(term)}&location=${encodeURIComponent(loc)}&radius=${radius}&price=${priceRange}&limit=10`;
 
   try {
     const response = await fetch(url, {
-  headers: {
-    Authorization: 'Bearer ' + YELP_API_KEY,
-  }
-});
+      headers: {
+        Authorization: 'Bearer ' + YELP_API_KEY,
+      }
+    });
 
     const data = await response.json();
     const businesses = data.businesses;
