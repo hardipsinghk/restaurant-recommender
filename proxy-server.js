@@ -19,10 +19,10 @@ app.get('/api/recommend', async (req, res) => {
 
   try {
     const response = await fetch(url, {
-      headers: {
-        Authorization: \`Bearer \${YELP_API_KEY}\`,
-      }
-    });
+  headers: {
+    Authorization: 'Bearer ' + YELP_API_KEY,
+  }
+});
 
     const data = await response.json();
     const businesses = data.businesses;
