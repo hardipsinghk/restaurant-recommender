@@ -1,6 +1,6 @@
 async function getRecommendation() {
-  const price = parseInt(document.getElementById('price').value);
-  const distance = parseInt(document.getElementById('distance').value);
+  const price = document.getElementById('price').value;
+  const distance = document.getElementById('distance').value;
   const resultDiv = document.getElementById('result');
 
   resultDiv.style.display = 'block';
@@ -22,3 +22,10 @@ async function getRecommendation() {
     console.error(err);
   }
 }
+
+function updateSliderValues() {
+  document.getElementById('dist-value').innerText = document.getElementById('distance').value;
+  document.getElementById('price-value').innerText = document.getElementById('price').value;
+}
+
+window.onload = updateSliderValues;

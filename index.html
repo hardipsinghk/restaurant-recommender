@@ -18,13 +18,17 @@
       </div>
 
       <div class="slider-group">
-        <label>Price ($):</label>
-        <input type="range" id="price" min="1" max="3" value="2">
+        <label>Price ($): 
+          <input type="range" id="price" min="1" max="4" value="2" oninput="updateSliderValues()">
+          <span id="price-value">2</span>
+        </label>
       </div>
 
       <div class="slider-group">
-        <label>Distance (km):</label>
-        <input type="range" id="distance" min="1" max="40" value="10">
+        <label>Distance (km): 
+          <input type="range" id="distance" min="1" max="40" value="10" oninput="updateSliderValues()">
+          <span id="dist-value">10</span> km
+        </label>
       </div>
 
       <div id="result" class="result-card"></div>
