@@ -3,7 +3,7 @@ async function getRecommendation() {
   const distance = document.getElementById('distance').value;
   const cuisine = document.getElementById('cuisine').value;
   const location = document.getElementById('location').value;
-  const resultDiv = document.getElementById('result');
+  const resultDiv = document.getElementById('modal-result');
   const modal = document.getElementById('modal');
 
   resultDiv.innerHTML = "Fetching a great spot for you...";
