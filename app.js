@@ -4,11 +4,11 @@ async function getRecommendation() {
   const cuisine = document.getElementById('cuisine').value;
   const location = document.getElementById('location').value;
   const resultDiv = document.getElementById('result');
-  const icon = document.getElementById('question-icon');
+  const iconContainer = document.getElementById('question-circle');
 
-  // shrink the icon after click
-  icon.classList.remove('large');
-  icon.classList.add('small');
+  // Shrink the circle when clicked
+  iconContainer.classList.remove('large');
+  iconContainer.classList.add('small');
 
   resultDiv.style.display = 'block';
   resultDiv.innerHTML = "Fetching a great spot for you...";
@@ -47,7 +47,4 @@ function updateSliderValues() {
 
 window.onload = () => {
   updateSliderValues();
-  const icon = document.getElementById('question-icon');
-  icon.classList.remove('small');
-  icon.classList.add('large');
 };
