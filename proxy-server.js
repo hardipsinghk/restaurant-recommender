@@ -46,6 +46,6 @@ app.get('/api/recommend', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log('Proxy server running at http://localhost:' + PORT);}\`);
+  console.log('Proxy server running at http://localhost:' + PORT);`);
 });
   # adds a harmless empty line
