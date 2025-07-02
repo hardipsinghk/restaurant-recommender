@@ -4,9 +4,10 @@ async function getRecommendation() {
   const cuisine = document.getElementById('cuisine').value;
   const location = document.getElementById('location').value;
   const resultDiv = document.getElementById('result');
+  const modal = document.getElementById('modal');
 
-  resultDiv.style.display = 'block';
   resultDiv.innerHTML = "Fetching a great spot for you...";
+  modal.style.display = 'flex';
 
   const query = new URLSearchParams({
     price,
@@ -38,6 +39,11 @@ async function getRecommendation() {
 function updateSliderValues() {
   document.getElementById('dist-value').innerText = document.getElementById('distance').value;
   document.getElementById('price-value').innerText = document.getElementById('price').value;
+}
+
+function closeModal() {
+  const modal = document.getElementById('modal');
+  modal.style.display = 'none';
 }
 
 window.onload = updateSliderValues;
