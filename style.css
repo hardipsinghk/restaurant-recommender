@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
   background-color: #fff;
   color: #333;
 }
@@ -9,6 +9,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  align-items: center;
   padding: 16px;
 }
 
@@ -16,6 +17,7 @@ header {
   display: flex;
   align-items: center;
   height: 40px;
+  width: 100%;
 }
 
 .menu-icon {
@@ -28,8 +30,8 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
-  padding-top: 16px;
+  width: 100%;
+  max-width: 500px;
 }
 
 .center-icon {
@@ -43,14 +45,16 @@ main {
   font-size: 48px;
   color: #2196f3;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 .filter-group {
-  width: 90%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
   margin-bottom: 20px;
 }
 
@@ -58,10 +62,12 @@ main {
   display: flex;
   flex-direction: column;
   font-weight: 500;
+  width: 100%;
 }
 
 input[type="range"] {
-  width: 100%;
+  width: 80%;
+  margin-top: 4px;
 }
 
 select {
@@ -72,7 +78,7 @@ select {
 }
 
 .result-card {
-  width: 90%;
+  width: 100%;
   max-width: 500px;
   background-color: #f9f9f9;
   padding: 16px;
@@ -96,4 +102,16 @@ select {
 
 .result-card p {
   margin: 6px 0;
+}
+
+.center-icon {
+  transition: transform 0.2s ease-in-out;
+}
+
+.center-icon:hover {
+  transform: scale(1.1);
+}
+
+.center-icon:active {
+  transform: scale(0.95);
 }
