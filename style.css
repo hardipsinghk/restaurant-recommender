@@ -47,3 +47,33 @@ a {
   color: #fff;
   cursor: pointer;
 }
+
+/* Maintain layout spacing in dark mode */
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.filter-group label,
+.dropdown-row label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  font-size: 0.95em;
+  text-align: center;
+  width: 100%;
+}
+
+.dropdown-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 400px;
+}
