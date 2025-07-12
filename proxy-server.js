@@ -8,19 +8,23 @@ const YELP_API_KEY = process.env.YELP_API_KEY;
 app.use(express.static('.'));
 
 app.get('/api/recommend', async (req, res) => {
-  const { price, distance, cuisine, location, latitude, longitude } = req.query;
+  const { price, distance, cuisine, postal, latitude, longitude } = req.query;
   const radius = Math.min(parseInt(distance || 10) * 1000, 40000);
   const priceRange = Array.from({ length: price }, (_, i) => i + 1).join(',');
-
   const term = cuisine || 'restaurants';
 
-  const url = latitude && longitude
-    ? 'https://api.yelp.com/v3/businesses/search?term=' + encodeURIComponent(term) +
-      '&latitude=' + latitude + '&longitude=' + longitude +
-      '&radius=' + radius + '&price=' + priceRange + '&limit=10'
-    : 'https://api.yelp.com/v3/businesses/search?term=' + encodeURIComponent(term) +
-      '&location=' + encodeURIComponent(location || 'Toronto, Canada') +
-      '&radius=' + radius + '&price=' + priceRange + '&limit=10';
+  let url = '';
+  if (postal) {
+    url = 'https://api.yelp.com/v3/businesses/search?term=' + encodeURIComponent(term) +
+          '&location=' + encodeURIComponent(postal) +
+          '&radius=' + radius + '&price=' + priceRange + '&limit=10';
+  } else if (latitude && longitude) {
+    url = 'https://api.yelp.com/v3/businesses/search?term=' + encodeURIComponent(term) +
+          '&latitude=' + latitude + '&longitude=' + longitude +
+          '&radius=' + radius + '&price=' + priceRange + '&limit=10';
+  } else {
+    return res.status(400).json({ error: "No valid location info provided" });
+  }
 
   try {
     const response = await fetch(url, {
