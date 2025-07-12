@@ -12,10 +12,10 @@ app.get('/api/recommend', async (req, res) => {
   const radius = Math.min(parseInt(distance || 10) * 1000, 40000);
   const priceRange = Array.from({ length: price }, (_, i) => i + 1).join(',');
 
-  // Build search term from meal + cuisine
+  // Combine meal + cuisine as search term
   let term = '';
   if (meal && cuisine) {
-    term = \`\${meal} \${cuisine}\`;
+    term = meal + ' ' + cuisine;
   } else if (meal) {
     term = meal;
   } else if (cuisine) {
@@ -25,8 +25,12 @@ app.get('/api/recommend', async (req, res) => {
   }
 
   const url = latitude && longitude
-    ? \`https://api.yelp.com/v3/businesses/search?term=\${encodeURIComponent(term)}&latitude=\${latitude}&longitude=\${longitude}&radius=\${radius}&price=\${priceRange}&limit=10\`
-    : \`https://api.yelp.com/v3/businesses/search?term=\${encodeURIComponent(term)}&location=\${encodeURIComponent(location || 'Toronto, Canada')}&radius=\${radius}&price=\${priceRange}&limit=10\`;
+    ? 'https://api.yelp.com/v3/businesses/search?term=' + encodeURIComponent(term) +
+      '&latitude=' + latitude + '&longitude=' + longitude +
+      '&radius=' + radius + '&price=' + priceRange + '&limit=10'
+    : 'https://api.yelp.com/v3/businesses/search?term=' + encodeURIComponent(term) +
+      '&location=' + encodeURIComponent(location || 'Toronto, Canada') +
+      '&radius=' + radius + '&price=' + priceRange + '&limit=10';
 
   try {
     const response = await fetch(url, {
@@ -43,7 +47,8 @@ app.get('/api/recommend', async (req, res) => {
     }
 
     const random = businesses[Math.floor(Math.random() * businesses.length)];
-    const mapsLink = \`https://www.google.com/maps/search/?api=1&query=\${encodeURIComponent(random.name + ' ' + random.location.address1)}\`;
+    const mapsLink = 'https://www.google.com/maps/search/?api=1&query=' +
+                     encodeURIComponent(random.name + ' ' + random.location.address1);
 
     res.json({
       name: random.name,
