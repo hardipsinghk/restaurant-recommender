@@ -44,13 +44,17 @@ app.get('/api/recommend', async (req, res) => {
     const mapsLink = 'https://www.google.com/maps/search/?api=1&query=' +
                      encodeURIComponent(random.name + ' ' + random.location.address1);
 
+    // Check if "halal" appears in categories
+    const isHalal = random.categories?.some(cat => cat.title.toLowerCase().includes("halal")) || false;
+
     res.json({
       name: random.name,
       address: random.location.address1,
       rating: random.rating,
       price: random.price,
       photo: random.image_url,
-      map: mapsLink
+      map: mapsLink,
+      halal: isHalal
     });
   } catch (error) {
     console.error(error);
