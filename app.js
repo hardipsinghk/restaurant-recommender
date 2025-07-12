@@ -2,7 +2,7 @@ async function getRecommendation() {
   const price = document.getElementById('price').value;
   const distance = document.getElementById('distance').value;
   const cuisine = document.getElementById('cuisine').value;
-  const location = document.getElementById('location').value;
+  const postal = document.getElementById('postal').value.trim();
   const resultDiv = document.getElementById('result');
   const iconContainer = document.getElementById('question-circle');
 
@@ -11,25 +11,27 @@ async function getRecommendation() {
   resultDiv.style.display = 'block';
   resultDiv.innerHTML = "Fetching a great spot for you...";
 
-  const coords = await new Promise((resolve) => {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
-      () => resolve(null),  // fallback to city
-      { timeout: 5000 }
-    );
-  });
-
   const queryParams = {
     price,
     distance,
     cuisine
   };
 
-  if (coords) {
-    queryParams.latitude = coords.lat;
-    queryParams.longitude = coords.lon;
+  if (postal) {
+    queryParams.postal = postal;
   } else {
-    queryParams.location = location;
+    const coords = await new Promise((resolve) => {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
+        () => resolve(null),
+        { timeout: 5000 }
+      );
+    });
+
+    if (coords) {
+      queryParams.latitude = coords.lat;
+      queryParams.longitude = coords.lon;
+    }
   }
 
   const query = new URLSearchParams(queryParams).toString();
