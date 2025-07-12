@@ -8,14 +8,14 @@ const YELP_API_KEY = process.env.YELP_API_KEY;
 app.use(express.static('.'));
 
 app.get('/api/recommend', async (req, res) => {
-  const { price, distance, cuisine, location } = req.query;
+  const { price, distance, cuisine, location, latitude, longitude } = req.query;
   const radius = Math.min(parseInt(distance || 10) * 1000, 40000);
   const priceRange = Array.from({ length: price }, (_, i) => i + 1).join(',');
-
   const term = cuisine || 'restaurants';
-  const loc = location || 'Toronto, Canada';
 
-  const url = `https://api.yelp.com/v3/businesses/search?term=${encodeURIComponent(term)}&location=${encodeURIComponent(loc)}&radius=${radius}&price=${priceRange}&limit=10`;
+  const url = latitude && longitude
+    ? `https://api.yelp.com/v3/businesses/search?term=${encodeURIComponent(term)}&latitude=${latitude}&longitude=${longitude}&radius=${radius}&price=${priceRange}&limit=10`
+    : `https://api.yelp.com/v3/businesses/search?term=${encodeURIComponent(term)}&location=${encodeURIComponent(location || 'Toronto, Canada')}&radius=${radius}&price=${priceRange}&limit=10`;
 
   try {
     const response = await fetch(url, {
@@ -32,7 +32,7 @@ app.get('/api/recommend', async (req, res) => {
     }
 
     const random = businesses[Math.floor(Math.random() * businesses.length)];
-    const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(random.name + ' ' + random.location.address1 + ' ' + loc)}`;
+    const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(random.name + ' ' + random.location.address1)}`;
 
     res.json({
       name: random.name,

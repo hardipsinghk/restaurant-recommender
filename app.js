@@ -6,19 +6,33 @@ async function getRecommendation() {
   const resultDiv = document.getElementById('result');
   const iconContainer = document.getElementById('question-circle');
 
-  // Shrink the circle when clicked
   iconContainer.classList.remove('large');
   iconContainer.classList.add('small');
-
   resultDiv.style.display = 'block';
   resultDiv.innerHTML = "Fetching a great spot for you...";
 
-  const query = new URLSearchParams({
+  const coords = await new Promise((resolve) => {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
+      () => resolve(null),  // fallback to city
+      { timeout: 5000 }
+    );
+  });
+
+  const queryParams = {
     price,
     distance,
-    cuisine,
-    location
-  }).toString();
+    cuisine
+  };
+
+  if (coords) {
+    queryParams.latitude = coords.lat;
+    queryParams.longitude = coords.lon;
+  } else {
+    queryParams.location = location;
+  }
+
+  const query = new URLSearchParams(queryParams).toString();
 
   try {
     const response = await fetch(`/api/recommend?${query}`);
