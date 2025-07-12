@@ -30,11 +30,10 @@
           <span id="dist-value">10</span> km
         </label>
 
-        <label><span class="material-icons">location_on</span> Postal Code
-          <input type="text" id="postal" placeholder="Enter postal code (optional)">
-        </label>
+        
+<div class="dropdown-row">
+  </div>
 
-        <label><span class="material-icons">restaurant</span> Cuisine
           <select id="cuisine">
             <option value="">Any</option>
             <option value="italian">Italian</option>
@@ -48,6 +47,28 @@
           </select>
         </label>
       </div>
+
+      
+<div class="dropdown-row">
+  <label><span class="material-icons">location_on</span> Postal Code
+    <input type="text" id="postal" placeholder="Enter postal code (optional)">
+  </label>
+
+  <label><span class="material-icons">restaurant</span> Cuisine
+    <select id="cuisine">
+      <option value="">Any</option>
+      <option value="italian">Italian</option>
+      <option value="indian">Indian</option>
+      <option value="chinese">Chinese</option>
+      <option value="mexican">Mexican</option>
+      <option value="japanese">Japanese</option>
+      <option value="thai">Thai</option>
+      <option value="vegan">Vegan</option>
+      <option value="dessert">Dessert</option>
+    </select>
+  </label>
+</div>
+
 
       <div id="result" class="result-card"></div>
     </main>
