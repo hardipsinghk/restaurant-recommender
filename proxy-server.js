@@ -8,21 +8,11 @@ const YELP_API_KEY = process.env.YELP_API_KEY;
 app.use(express.static('.'));
 
 app.get('/api/recommend', async (req, res) => {
-  const { price, distance, cuisine, location, latitude, longitude, meal } = req.query;
+  const { price, distance, cuisine, location, latitude, longitude } = req.query;
   const radius = Math.min(parseInt(distance || 10) * 1000, 40000);
   const priceRange = Array.from({ length: price }, (_, i) => i + 1).join(',');
 
-  // Combine meal + cuisine as search term
-  let term = '';
-  if (meal && cuisine) {
-    term = meal + ' ' + cuisine;
-  } else if (meal) {
-    term = meal;
-  } else if (cuisine) {
-    term = cuisine;
-  } else {
-    term = 'restaurants';
-  }
+  const term = cuisine || 'restaurants';
 
   const url = latitude && longitude
     ? 'https://api.yelp.com/v3/businesses/search?term=' + encodeURIComponent(term) +
